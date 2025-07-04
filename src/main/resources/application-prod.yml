@@ -1,0 +1,73 @@
+# =========================
+# = Cloudinary Config
+# =========================
+cloudinary:
+  cloud-name: ${CLOUDINARY_CLOUD_NAME}
+  api-key: ${CLOUDINARY_API_KEY}
+  api-secret: ${CLOUDINARY_API_SECRET}
+
+# =========================
+# = Application Config
+# =========================
+spring:
+  mail:
+    username: ${MAIL_USERNAME:abdallahalmasry99@gmail.com}
+    password: ${MAIL_PASSWORD:fihsrogaqgsyenol}
+    properties:
+      mail:
+        debug: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+# =========================
+# = Datasource Config
+# =========================
+database:
+  name: ${DB_NAME}
+  schema: ${DB_SCHEMA}
+  host: ${DB_HOST}
+  port: ${DB_PORT}
+  username: ${DB_USERNAME}
+  password: ${DB_PASSWORD}
+# =========================
+# = Logging Config
+# =========================
+logging:
+  level:
+    root: INFO
+
+    # Application-specific logging
+    com.vodafone.ecommerce.service: ${LOG_LEVEL:DEBUG}
+
+    # Hibernate SQL and bind parameter logging
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+    # Spring JSON (ObjectMapper, etc.) converter logging
+    org.springframework.http.converter.json: DEBUG
+
+# =========================
+# = Security Config
+# =========================
+security:
+  jwt:
+    secret-key: ${JWT_SECRET_KEY}
+    access:
+      expiration: ${JWT_ACCESS_EXPIRATION:900000}
+    refresh:
+      expiration: ${JWT_REFRESH_EXPIRATION:604800000}
+
+# =========================
+# = Stripe Config
+# =========================
+stripe:
+  secret:
+    key: ${STRIPE_SECRET_KEY}
+
+# =========================
+# = Admin Config
+# =========================
+admin:
+  password: ${ADMIN_PASSWORD:Admin@123}
