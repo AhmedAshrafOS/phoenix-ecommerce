@@ -1,0 +1,98 @@
+# =========================
+# = Application Config
+# =========================
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /ecommerce-service
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  application:
+    name: ecommerce-service
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+  # =========================
+  # = Jackson Config
+  # =========================
+  jackson:
+    default-property-inclusion: non_null
+
+  # =========================
+  # = Datasource Config
+  # =========================
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DATASOURCE_URL:jdbc:postgresql://c2fbt7u7f4htth.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com:5432/d1cirs5f4olfav}
+    username: ${DATASOURCE_USERNAME:u9jtrojg03li0u}
+    password: ${DATASOURCE_PASSWORD:p03410d42fce775bd4d507f14e8bb6804a1db1f26155d9fa1df1a2ceb3322b488}
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  data:
+    web:
+      pageable:
+        default-page-size: ${DEFAULT_PAGE_SIZE:10}
+
+  # =========================
+  # = Mail Config
+  # =========================
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# =========================
+# = SpringDoc Config
+# =========================
+springdoc:
+  packages-to-scan: com.vodafone.ecommerce.controller
+
+# =========================
+# = Actuator Config
+# =========================
+management:
+  endpoint:
+    metrics:
+      enabled: ${MANAGEMENT_ENDPOINT_METRICS_ENABLED:true}
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+        exclude: env, beans
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+# =========================
+# = Security Config
+# =========================
+security:
+  jwt:
+    secret-key: "Oa1KZO4rHIL3hw/gyX3TV5cob+EesPByW3KqWD1mOwk="
+    access:
+      expiration: 900000
+    refresh:
+      expiration: 604800000
+
+# =========================
+# = Logging Config
+# =========================
+logging:
+  level:
+    root: INFO
+    com.vodafone.ecommerce.service: ${LOG_LEVEL:DEBUG}
